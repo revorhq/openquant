@@ -1,0 +1,71 @@
+name: Bug report
+description: Report a bug in OpenQuant India
+title: "[bug] "
+labels: ["bug", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for filing a bug. **Data correctness bugs are P0** and we will
+        prioritise them — please include the exact symbol, date, and the
+        expected vs actual values.
+  - type: input
+    id: package
+    attributes:
+      label: Package
+      description: Which package is affected? (e.g. `oq-core`, `oq-data`, `oq-backtest`)
+      placeholder: oq-core
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Version
+      description: Package version (`pip show oq-core`).
+      placeholder: 0.1.0
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: Describe the bug
+      description: A clear and concise description of what the bug is.
+    validations:
+      required: true
+  - type: textarea
+    id: repro
+    attributes:
+      label: Minimal reproducible example
+      description: Smallest Python snippet that reproduces the problem.
+      render: python
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behaviour
+      description: What did you expect to happen? Include a primary source (NSE filing, exchange circular, broker doc) if relevant.
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behaviour
+      description: What actually happened? Include full tracebacks if any.
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: Environment
+      description: Python version, OS, install method (`pip` / `uv` / source).
+      placeholder: Python 3.11.9 on macOS 14.5, installed via uv
+    validations:
+      required: true
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: Code of Conduct
+      options:
+        - label: I agree to follow the project's Code of Conduct.
+          required: true

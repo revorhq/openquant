@@ -1,0 +1,51 @@
+name: Data correctness (P0)
+description: Report incorrect data — wrong adjusted price, missing corporate action, bad universe membership.
+title: "[data] "
+labels: ["bug", "data", "P0"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Data correctness bugs are P0. The more specifics you provide, the
+        faster we can fix it.
+  - type: input
+    id: symbol
+    attributes:
+      label: Symbol / ISIN
+      placeholder: RELIANCE / INE002A01018
+    validations:
+      required: true
+  - type: input
+    id: date
+    attributes:
+      label: Date (or date range)
+      placeholder: 2023-07-13
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected value(s) and source
+      description: Cite the primary source (NSE bhavcopy URL, corporate action filing, exchange circular).
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Value returned by OpenQuant
+    validations:
+      required: true
+  - type: textarea
+    id: repro
+    attributes:
+      label: Reproducing call
+      render: python
+    validations:
+      required: true
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: Code of Conduct
+      options:
+        - label: I agree to follow the project's Code of Conduct.
+          required: true

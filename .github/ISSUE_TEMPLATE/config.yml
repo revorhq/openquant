@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Question or discussion
+    url: https://github.com/openquant-india/openquant/discussions
+    about: For usage questions, ideas, or general discussion, please use Discussions.
+  - name: Security issue
+    url: https://github.com/openquant-india/openquant/security/advisories/new
+    about: Privately report a security vulnerability.
