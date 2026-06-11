@@ -12,6 +12,7 @@ members = ["packages/*"]
 
 [tool.uv.sources]
 oq-core = { workspace = true }
+oq-backtest = { workspace = true }
 
 [dependency-groups]
 dev = [
@@ -19,6 +20,7 @@ dev = [
     "pytest-cov>=5.0",
     "ruff>=0.6.0",
     "oq-core",
+    "oq-backtest",
 ]
 
 [tool.ruff]
