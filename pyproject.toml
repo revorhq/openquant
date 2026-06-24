@@ -14,15 +14,18 @@ members = ["packages/*"]
 oq-core = { workspace = true }
 oq-backtest = { workspace = true }
 oq-data = { workspace = true }
+oq-mcp = { workspace = true }
 
 [dependency-groups]
 dev = [
     "pytest>=8.0",
     "pytest-cov>=5.0",
+    "pytest-asyncio>=0.23",
     "ruff>=0.6.0",
     "oq-core",
     "oq-backtest",
     "oq-data",
+    "oq-mcp",
 ]
 
 [tool.ruff]
@@ -51,3 +54,4 @@ indent-style = "space"
 minversion = "8.0"
 testpaths = ["packages/*/tests"]
 addopts = ["-ra", "--strict-markers", "--strict-config"]
+asyncio_mode = "auto"
