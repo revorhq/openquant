@@ -1,0 +1,31 @@
+name: zoo honesty gate
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "packages/oq-zoo/**"
+      - ".github/workflows/zoo-honesty-gate.yml"
+
+jobs:
+  gate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v3
+        with:
+          enable-cache: true
+
+      - name: Set up Python 3.12
+        run: uv python install 3.12
+
+      - name: Sync dependencies
+        run: uv sync --python 3.12
+
+      - name: Run oq-zoo tests (gate logic)
+        run: uv run pytest packages/oq-zoo/tests -q
+
+      - name: List registered strategies
+        run: uv run oq-zoo list --module oq_zoo.strategies

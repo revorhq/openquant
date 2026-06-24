@@ -18,6 +18,7 @@ members = [
     "oq-core",
     "oq-data",
     "oq-mcp",
+    "oq-zoo",
 ]
 
 [[package]]
@@ -554,6 +555,7 @@ dev = [
     { name = "oq-core" },
     { name = "oq-data" },
     { name = "oq-mcp" },
+    { name = "oq-zoo" },
     { name = "pytest" },
     { name = "pytest-asyncio" },
     { name = "pytest-cov" },
@@ -569,6 +571,7 @@ dev = [
     { name = "oq-core", editable = "packages/oq-core" },
     { name = "oq-data", editable = "packages/oq-data" },
     { name = "oq-mcp", editable = "packages/oq-mcp" },
+    { name = "oq-zoo", editable = "packages/oq-zoo" },
     { name = "pytest", specifier = ">=8.0" },
     { name = "pytest-asyncio", specifier = ">=0.23" },
     { name = "pytest-cov", specifier = ">=5.0" },
@@ -661,6 +664,25 @@ requires-dist = [
     { name = "oq-backtest", editable = "packages/oq-backtest" },
     { name = "oq-core", editable = "packages/oq-core" },
     { name = "oq-data", editable = "packages/oq-data" },
+    { name = "pandas", specifier = ">=2.0" },
+]
+
+[[package]]
+name = "oq-zoo"
+version = "0.1.0"
+source = { editable = "packages/oq-zoo" }
+dependencies = [
+    { name = "numpy" },
+    { name = "oq-backtest" },
+    { name = "oq-core" },
+    { name = "pandas" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "numpy", specifier = ">=1.24" },
+    { name = "oq-backtest", editable = "packages/oq-backtest" },
+    { name = "oq-core", editable = "packages/oq-core" },
     { name = "pandas", specifier = ">=2.0" },
 ]
 
