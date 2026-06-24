@@ -1,0 +1,37 @@
+[project]
+name = "oq-broker"
+version = "0.1.0"
+description = "Unified async broker abstraction, paper engine, and SEBI-2026 native compliance for OpenQuant India."
+requires-python = ">=3.11"
+license = { text = "Apache-2.0" }
+authors = [{ name = "OpenQuant India Contributors" }]
+keywords = ["quant", "trading", "india", "nse", "broker", "kite", "dhan", "sebi"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Financial and Insurance Industry",
+    "License :: OSI Approved :: Apache Software License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Office/Business :: Financial :: Investment",
+]
+dependencies = [
+    "pandas>=2.0",
+    "numpy>=1.24",
+    "oq-core",
+    "oq-backtest",
+]
+
+[project.urls]
+Homepage = "https://github.com/revorhq/openquant"
+Repository = "https://github.com/revorhq/openquant"
+Issues = "https://github.com/revorhq/openquant/issues"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/oq_broker"]
