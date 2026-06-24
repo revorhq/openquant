@@ -1,0 +1,93 @@
+name: Data Snapshot
+
+on:
+  schedule:
+    - cron: "30 13 * * 1-5"
+  workflow_dispatch:
+    inputs:
+      lookback_days:
+        description: "Calendar days to backfill on this run."
+        required: false
+        default: "10"
+
+concurrency:
+  group: ${{ github.workflow }}
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  snapshot:
+    name: oq sync --quick (derived metadata only)
+    runs-on: ubuntu-latest
+    env:
+      OPENQUANT_DATA_DIR: ${{ github.workspace }}/.oq-cache
+      LOOKBACK_DAYS: ${{ inputs.lookback_days || '10' }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v3
+        with:
+          enable-cache: true
+
+      - name: Set up Python
+        run: uv python install 3.12
+
+      - name: Sync dependencies
+        run: uv sync --python 3.12
+
+      - name: Run oq sync --quick
+        id: sync
+        continue-on-error: true
+        run: |
+          mkdir -p "$OPENQUANT_DATA_DIR"
+          uv run oq sync --quick || echo "::warning::oq sync --quick failed; NSE may be unreachable"
+
+      - name: Build derived snapshot (no raw NSE redistribution)
+        run: |
+          set -euo pipefail
+          OUT="${{ github.workspace }}/snapshot"
+          mkdir -p "$OUT"
+          uv run oq coverage > "$OUT/coverage.txt" 2>&1 || true
+          uv run python - <<'PY'
+          from datetime import date
+          from pathlib import Path
+
+          from oq_data import api, load_master, load_universes
+
+          out = Path("snapshot")
+          out.mkdir(exist_ok=True)
+          try:
+              syms = api.list_symbols()
+              syms.to_parquet(out / "symbols.parquet", index=False)
+          except Exception as exc:
+              (out / "symbols.error.txt").write_text(str(exc))
+          try:
+              master = load_master()
+              if not master.empty:
+                  master.to_parquet(out / "symbol_master.parquet", index=False)
+          except Exception as exc:
+              (out / "symbol_master.error.txt").write_text(str(exc))
+          try:
+              uni = load_universes()
+              if not uni.empty:
+                  uni.to_parquet(out / "universes.parquet", index=False)
+          except Exception as exc:
+              (out / "universes.error.txt").write_text(str(exc))
+          (out / "README.txt").write_text(
+              "OpenQuant daily derived snapshot.\n"
+              "Contains symbol master, universe membership, and coverage stats only.\n"
+              "Raw NSE bhavcopy data is NOT redistributed here (see PRD section 11).\n"
+              f"Generated: {date.today().isoformat()}\n"
+          )
+          PY
+
+      - name: Upload derived snapshot artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: oq-derived-snapshot
+          path: snapshot/
+          retention-days: 14
+          if-no-files-found: warn
