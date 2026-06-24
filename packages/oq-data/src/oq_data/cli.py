@@ -20,7 +20,7 @@ from pathlib import Path
 import click
 import pandas as pd
 
-from oq_data import api, bhavcopy, storage
+from oq_data import announcements, api, bhavcopy, delivery, flows, fno, storage
 from oq_data.config import get_paths
 
 
@@ -130,6 +130,102 @@ def prices(
         sys.exit(1)
     pd.options.display.max_rows = None
     click.echo(df.to_csv(index=False))
+
+
+@main.command("sync-fno")
+@click.option("--start", "start", type=str, required=False)
+@click.option("--end", "end", type=str, required=False)
+@click.option("--quick", is_flag=True, help="Sync the last 10 calendar days only.")
+@click.pass_context
+def sync_fno(ctx: click.Context, start: str | None, end: str | None, quick: bool) -> None:
+    """Download NSE F&O bhavcopies and write to the Parquet store."""
+    paths = ctx.obj["paths"]
+    today = date.today()
+    if quick:
+        end_d, start_d = today, today - timedelta(days=10)
+    else:
+        end_d = _parse_date(end) if end else today
+        start_d = _parse_date(start) if start else (end_d - timedelta(days=30))
+    click.echo(f"[oq] syncing fno bhavcopies {start_d} -> {end_d} into {paths.eod_fno}")
+    written = 0
+    for when in fno.sync_range(start_d, end_d, paths=paths):
+        df = fno.download_fno(when, paths=paths)
+        rows = storage.write_fno(df, paths=paths)
+        written += rows
+        click.echo(f"  {when}  {rows:>6d} rows")
+    click.echo(f"[oq] done. {written} total fno rows written.")
+
+
+@main.command("sync-delivery")
+@click.option("--start", "start", type=str, required=False)
+@click.option("--end", "end", type=str, required=False)
+@click.option("--quick", is_flag=True)
+@click.pass_context
+def sync_delivery(ctx: click.Context, start: str | None, end: str | None, quick: bool) -> None:
+    """Download NSE delivery-% files and write to the Parquet store."""
+    paths = ctx.obj["paths"]
+    today = date.today()
+    if quick:
+        end_d, start_d = today, today - timedelta(days=10)
+    else:
+        end_d = _parse_date(end) if end else today
+        start_d = _parse_date(start) if start else (end_d - timedelta(days=30))
+    click.echo(f"[oq] syncing delivery {start_d} -> {end_d} into {paths.delivery}")
+    written = 0
+    for when in delivery.sync_range(start_d, end_d, paths=paths):
+        df = delivery.download_delivery(when, paths=paths)
+        rows = delivery.write_delivery(df, paths=paths)
+        written += rows
+        click.echo(f"  {when}  {rows:>6d} rows")
+    click.echo(f"[oq] done. {written} total delivery rows written.")
+
+
+@main.command("sync-flows")
+@click.option("--start", "start", type=str, required=False)
+@click.option("--end", "end", type=str, required=False)
+@click.option("--quick", is_flag=True)
+@click.pass_context
+def sync_flows(ctx: click.Context, start: str | None, end: str | None, quick: bool) -> None:
+    """Download FII/DII cash-market flows and write to the Parquet store."""
+    paths = ctx.obj["paths"]
+    today = date.today()
+    if quick:
+        end_d, start_d = today, today - timedelta(days=10)
+    else:
+        end_d = _parse_date(end) if end else today
+        start_d = _parse_date(start) if start else (end_d - timedelta(days=30))
+    click.echo(f"[oq] syncing fii/dii flows {start_d} -> {end_d} into {paths.fii_dii}")
+    written = 0
+    for when in flows.sync_range(start_d, end_d, paths=paths):
+        df = flows.download_flows(when, paths=paths)
+        rows = flows.write_flows(df, paths=paths)
+        written += rows
+        click.echo(f"  {when}  {rows:>6d} rows")
+    click.echo(f"[oq] done. {written} total flow rows written.")
+
+
+@main.command("sync-announcements")
+@click.option("--start", "start", type=str, required=False)
+@click.option("--end", "end", type=str, required=False)
+@click.option("--quick", is_flag=True)
+@click.pass_context
+def sync_announcements(ctx: click.Context, start: str | None, end: str | None, quick: bool) -> None:
+    """Download corporate announcements and write to the Parquet store."""
+    paths = ctx.obj["paths"]
+    today = date.today()
+    if quick:
+        end_d, start_d = today, today - timedelta(days=10)
+    else:
+        end_d = _parse_date(end) if end else today
+        start_d = _parse_date(start) if start else (end_d - timedelta(days=30))
+    click.echo(f"[oq] syncing announcements {start_d} -> {end_d} into {paths.announcements}")
+    written = 0
+    for when in announcements.sync_range(start_d, end_d, paths=paths):
+        df = announcements.download_announcements(when, paths=paths)
+        rows = announcements.write_announcements(df, paths=paths)
+        written += rows
+        click.echo(f"  {when}  {rows:>6d} rows")
+    click.echo(f"[oq] done. {written} total announcement rows written.")
 
 
 if __name__ == "__main__":

@@ -41,6 +41,22 @@ class DataPaths:
         return self.parquet / "eod_equity"
 
     @property
+    def eod_fno(self) -> Path:
+        return self.parquet / "eod_fno"
+
+    @property
+    def delivery(self) -> Path:
+        return self.parquet / "delivery"
+
+    @property
+    def fii_dii(self) -> Path:
+        return self.parquet / "fii_dii"
+
+    @property
+    def announcements(self) -> Path:
+        return self.parquet / "announcements"
+
+    @property
     def reference(self) -> Path:
         return self.root / "reference"
 
@@ -57,7 +73,15 @@ class DataPaths:
         return self.reference / "universes.parquet"
 
     def ensure(self) -> None:
-        for path in (self.bhavcopy, self.eod_equity, self.reference):
+        for path in (
+            self.bhavcopy,
+            self.eod_equity,
+            self.eod_fno,
+            self.delivery,
+            self.fii_dii,
+            self.announcements,
+            self.reference,
+        ):
             path.mkdir(parents=True, exist_ok=True)
 
 

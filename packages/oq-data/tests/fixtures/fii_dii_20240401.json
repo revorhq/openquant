@@ -1,0 +1,4 @@
+[
+  {"category": "FII/FPI", "buyValue": "10000.00", "sellValue": "9500.00", "netValue": "500.00"},
+  {"category": "DII", "buyValue": "8000.00", "sellValue": "7500.00", "netValue": "500.00"}
+]
