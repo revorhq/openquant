@@ -13,6 +13,7 @@ members = ["packages/*"]
 [tool.uv.sources]
 oq-core = { workspace = true }
 oq-backtest = { workspace = true }
+oq-data = { workspace = true }
 
 [dependency-groups]
 dev = [
@@ -21,6 +22,7 @@ dev = [
     "ruff>=0.6.0",
     "oq-core",
     "oq-backtest",
+    "oq-data",
 ]
 
 [tool.ruff]
