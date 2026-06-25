@@ -6,7 +6,7 @@
 
 ---
 
-## In plain English
+## What this actually is
 
 If you're trading Indian stocks with code, this project is your toolkit.
 
@@ -156,6 +156,58 @@ result.tearsheet()   # gross vs net, cost attribution, drawdowns, the works
 - **Phase 4 — Execution Layer**: paper + live broker abstraction with
   SEBI-2026 compliance built in.
 - **Phase 5 — Ecosystem**: docs site, strategy zoo, Discord, cohorts.
+
+### What's next — beyond v1.0
+
+We've shipped the boring-but-critical foundation. Now we make it exciting.
+
+**Near term (Q3–Q4 2026)**
+
+- **OpenQuant Web** — a hosted web app for browser-based backtesting,
+  tearsheet rendering, and strategy sharing. No `pip install` required.
+- **REST + WebSocket API** — `api.openquant.in` exposing prices, universes,
+  screeners, and `run_backtest` over HTTPS with API keys and rate limits.
+- **Tearsheet GUI** — interactive Plotly/Streamlit app for equity curves,
+  drawdown explorers, and per-trade cost attribution.
+- **CLI dashboard** — `oq dash` opens a rich TUI for live paper-trading
+  monitoring, P&L, and kill-switch control.
+- **Options analytics** — Greeks, IV surface, OI heatmap, max-pain finder,
+  SEBI F&O position-limit validator.
+- **Intraday data feed** — 1-min/5-min bars across NSE EQ + F&O.
+- **Strategy marketplace** — `oq-zoo` browsable in the web app with
+  one-click clone-and-run.
+
+**Mid term (Q1–Q2 2027)**
+
+- **Live monitoring dashboard** — self-hosted Grafana-style panels for
+  positions, slippage attribution, broker latency, and circuit-breaker
+  alerts.
+- **AI co-pilot in the GUI** — "Why did my strategy lose money on
+  2024-03-12?" answered with a chart and a paragraph.
+- **Mobile app** — read-only PnL + kill-switch on iOS/Android.
+- **Mutual fund / ETF backtesting** module.
+- **Event-study toolkit** — earnings, index inclusion, splits, mergers.
+- **Factor library** — India-specific factors (momentum, low-vol, quality,
+  monsoon-cyclical, election-cycle) with risk decomposition.
+- **Notebook gallery** — JupyterLite-powered, runs in the browser.
+
+**Far term (H2 2027+)**
+
+- **Hosted backtest cloud** — burst your 5-year walk-forward across 100
+  cores in seconds; free tier + paid intraday/realtime tier.
+- **Strategy certification program** — `oq-zoo` strategies that pass
+  walk-forward + out-of-sample get a verifiable badge.
+- **Broker partnerships** — official "Works with OpenQuant" co-marketing
+  with Zerodha, Dhan, Upstox, Fyers.
+- **College curriculum** — course-in-a-box for IITs/IIMs/NITs.
+- **Multi-asset** — bonds, commodities (MCX), currency (NSE CDS).
+- **Plugin SDK** — third-party data feeds, custom cost models, alternative
+  brokers.
+
+**Permanent non-goals**
+
+No signal selling. No "guaranteed returns" anything. No managing third-party
+capital. No HFT/co-location. No closing the source on the core.
 
 Want to help? Look for `good first issue` once we open the repo, or read
 [CONTRIBUTING.md](./CONTRIBUTING.md).
