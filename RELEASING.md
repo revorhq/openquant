@@ -1,7 +1,11 @@
 # Releasing OpenQuant India to PyPI
 
 This monorepo publishes seven packages: `oq-core`, `oq-data`, `oq-backtest`,
-`oq-broker`, `oq-mcp`, `oq-zoo`, and the `openquant` meta-package.
+`oq-broker`, `oq-mcp`, `oq-zoo`, and the `openquant-india` meta-package.
+
+> **Naming note:** the bare `openquant` name on PyPI is held by an abandoned
+> 2017 package, so the meta-package ships as `openquant-india`. The brand,
+> GitHub org, and docs remain "OpenQuant India".
 
 Publishing is **fully automated via GitHub Actions and PyPI Trusted
 Publishing** — no API tokens are stored anywhere. Pushing a tag like
@@ -23,7 +27,7 @@ publisher* on PyPI before the first release.
    - **Workflow name:** `publish.yml`
    - **Environment name:** `pypi`
 4. Repeat for: `oq-data`, `oq-backtest`, `oq-broker`, `oq-mcp`, `oq-zoo`,
-   `openquant`.
+   `openquant-india`.
 
 Then, in the GitHub repo:
 
@@ -39,7 +43,7 @@ Reserve every name with a `0.0.0` placeholder release so nobody squats them.
 
 ```bash
 # From the repo root, on main, with a clean tree.
-for PKG in oq-core oq-data oq-backtest oq-broker oq-mcp oq-zoo openquant; do
+for PKG in oq-core oq-data oq-backtest oq-broker oq-mcp oq-zoo openquant-india; do
   # Temporarily set version to 0.0.0 in that package's pyproject.toml,
   # tag, push, then revert.
   sed -i.bak -E "s/^version = \"[^\"]+\"/version = \"0.0.0\"/" packages/$PKG/pyproject.toml
@@ -83,7 +87,7 @@ Each package must exist on PyPI before any other package can depend on it.
 Use this order:
 
 ```
-oq-core   →   oq-data   →   oq-backtest   →   oq-broker   →   oq-mcp   →   oq-zoo   →   openquant
+oq-core   →   oq-data   →   oq-backtest   →   oq-broker   →   oq-mcp   →   oq-zoo   →   openquant-india
 ```
 
 After each tag push, **wait for the publish workflow to finish** (and for
@@ -96,8 +100,9 @@ tagging the next one.
 
 `<package>-v<MAJOR>.<MINOR>.<PATCH>` — e.g. `oq-backtest-v0.1.0`.
 
-The workflow's tag pattern only matches the seven known package prefixes,
-so other tags are safe.
+The workflow's tag pattern only matches the seven known package prefixes
+(`oq-core-v*`, `oq-data-v*`, `oq-backtest-v*`, `oq-broker-v*`, `oq-mcp-v*`,
+`oq-zoo-v*`, `openquant-india-v*`), so other tags are safe.
 
 ---
 

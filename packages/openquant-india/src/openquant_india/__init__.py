@@ -1,7 +1,7 @@
-"""OpenQuant India meta-package.
+"""OpenQuant India — meta-package.
 
 Re-exports the most common entry points from the underlying packages so
-``import openquant`` works for casual users.
+``import openquant_india`` works for casual users.
 """
 
 from __future__ import annotations
@@ -14,7 +14,7 @@ def __getattr__(name: str):
         import importlib
 
         return importlib.import_module(f"oq_{name}")
-    raise AttributeError(f"module 'openquant' has no attribute {name!r}")
+    raise AttributeError(f"module 'openquant_india' has no attribute {name!r}")
 
 
 __all__ = ["__version__"]

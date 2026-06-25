@@ -9,7 +9,7 @@ on:
       - "oq-broker-v*"
       - "oq-mcp-v*"
       - "oq-zoo-v*"
-      - "openquant-v*"
+      - "openquant-india-v*"
 
 jobs:
   publish:

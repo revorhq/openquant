@@ -8,7 +8,7 @@ oq-data = { workspace = true }
 oq-mcp = { workspace = true }
 oq-broker = { workspace = true }
 oq-zoo = { workspace = true }
-openquant = { workspace = true }
+openquant-india = { workspace = true }
 
 [dependency-groups]
 dev = [
@@ -22,7 +22,7 @@ dev = [
     "oq-mcp",
     "oq-broker",
     "oq-zoo",
-    "openquant",
+    "openquant-india",
 ]
 
 [tool.ruff]
