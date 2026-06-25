@@ -18,6 +18,15 @@ from oq_backtest.costs import (
     resolve_config,
 )
 from oq_backtest.engine import backtest
+from oq_backtest.intraday import (
+    NSE_CLOSE,
+    NSE_OPEN,
+    IntradayConfig,
+    apply_square_off,
+    backtest_intraday,
+    intraday_summary,
+    is_intraday_preset,
+)
 from oq_backtest.result import BacktestResult
 from oq_backtest.slippage import (
     FixedBpsSlippage,
@@ -44,6 +53,8 @@ __all__ = [
     "FULL_SERVICE_DELIVERY",
     "FYERS_DELIVERY",
     "FYERS_INTRADAY",
+    "NSE_CLOSE",
+    "NSE_OPEN",
     "PRESETS",
     "UPSTOX_DELIVERY",
     "UPSTOX_INTRADAY",
@@ -54,16 +65,21 @@ __all__ = [
     "CostConfig",
     "FixedBpsSlippage",
     "Fold",
+    "IntradayConfig",
     "SlippageModel",
     "SpreadSlippage",
     "TaxBreakdown",
     "TaxConfig",
     "VolumeParticipationSlippage",
     "__version__",
+    "apply_square_off",
     "backtest",
+    "backtest_intraday",
     "compute_costs",
     "equal_weight",
     "estimate_taxes",
+    "intraday_summary",
+    "is_intraday_preset",
     "mean_reversion_signal",
     "momentum_signal",
     "rebalance_dates",
