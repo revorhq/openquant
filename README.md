@@ -161,7 +161,7 @@ result.tearsheet()   # gross vs net, cost attribution, drawdowns, the works
 
 We've shipped the boring-but-critical foundation. Now we make it exciting.
 
-**Near term (Q3–Q4 2026)**
+**Near term**
 
 - **OpenQuant Web** — a hosted web app for browser-based backtesting,
   tearsheet rendering, and strategy sharing. No `pip install` required.
@@ -177,7 +177,7 @@ We've shipped the boring-but-critical foundation. Now we make it exciting.
 - **Strategy marketplace** — `oq-zoo` browsable in the web app with
   one-click clone-and-run.
 
-**Mid term (Q1–Q2 2027)**
+**Mid term**
 
 - **Live monitoring dashboard** — self-hosted Grafana-style panels for
   positions, slippage attribution, broker latency, and circuit-breaker
@@ -191,7 +191,7 @@ We've shipped the boring-but-critical foundation. Now we make it exciting.
   monsoon-cyclical, election-cycle) with risk decomposition.
 - **Notebook gallery** — JupyterLite-powered, runs in the browser.
 
-**Far term (H2 2027+)**
+**Far term**
 
 - **Hosted backtest cloud** — burst your 5-year walk-forward across 100
   cores in seconds; free tier + paid intraday/realtime tier.
