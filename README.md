@@ -6,6 +6,37 @@
 
 ---
 
+## In plain English
+
+If you're trading Indian stocks with code, this project is your toolkit.
+
+- **The problem:** When you test a trading strategy on past data ("backtesting"),
+  most free tools lie to you. They show fat profits because they ignore the
+  fees, taxes, and friction that eat your returns in real life. A strategy
+  that "made 22% a year" on paper often makes 9% or less once you pay
+  brokerage, STT, GST, stamp duty, slippage, and taxes. Some lose money.
+- **What we built:** A set of small, pip-installable Python packages that do
+  the boring-but-critical work right:
+  - **`oq-data`** — pulls clean, corporate-action-adjusted NSE price history
+    so your tests aren't built on broken data (the HDFC merger alone breaks
+    most free sources).
+  - **`oq-backtest`** — tests your strategy with *all* the real Indian costs
+    baked in (Zerodha/Dhan/Upstox/Fyers presets included) and shows you
+    gross vs net side-by-side.
+  - **`oq-broker`** — one common interface to place paper or live orders
+    across major Indian brokers, with SEBI-2026 compliance (Algo-ID, audit
+    log, kill switch) wired in by default.
+  - **`oq-mcp`** — lets you ask an AI assistant like Claude to run an honest
+    backtest in plain English.
+  - **`oq-zoo`** — community strategies that *only* get accepted if they
+    survive honest-cost testing.
+- **Who it's for:** Retail algo traders, fintech builders, students, and
+  researchers who want truthful numbers instead of marketing-deck CAGRs.
+- **The one-liner:** Free tools tell you what you want to hear. This one tells
+  you what you'll actually make.
+
+---
+
 ## The hook
 
 Indian retail quants run backtests that look like this:
