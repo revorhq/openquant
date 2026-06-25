@@ -21,9 +21,9 @@ classifiers = [
 dependencies = []
 
 [project.urls]
-Homepage = "https://github.com/openquant-india/openquant"
-Repository = "https://github.com/openquant-india/openquant"
-Issues = "https://github.com/openquant-india/openquant/issues"
+Homepage = "https://github.com/revorhq/openquant"
+Repository = "https://github.com/revorhq/openquant"
+Issues = "https://github.com/revorhq/openquant/issues"
 
 [build-system]
 requires = ["hatchling"]

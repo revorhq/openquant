@@ -4,6 +4,7 @@ version = "0.1.0"
 description = "Community strategy zoo for OpenQuant India. Every strategy passes the honesty gate."
 requires-python = ">=3.11"
 license = { text = "Apache-2.0" }
+readme = "README.md"
 authors = [{ name = "OpenQuant India Contributors" }]
 keywords = ["quant", "trading", "india", "nse", "strategies"]
 classifiers = [

@@ -4,6 +4,7 @@ version = "0.1.0"
 description = "Unified async broker abstraction, paper engine, and SEBI-2026 native compliance for OpenQuant India."
 requires-python = ">=3.11"
 license = { text = "Apache-2.0" }
+readme = "README.md"
 authors = [{ name = "OpenQuant India Contributors" }]
 keywords = ["quant", "trading", "india", "nse", "broker", "kite", "dhan", "sebi"]
 classifiers = [
