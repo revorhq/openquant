@@ -6,6 +6,37 @@
 
 ---
 
+## What this actually is
+
+If you're trading Indian stocks with code, this project is your toolkit.
+
+- **The problem:** When you test a trading strategy on past data ("backtesting"),
+  most free tools lie to you. They show fat profits because they ignore the
+  fees, taxes, and friction that eat your returns in real life. A strategy
+  that "made 22% a year" on paper often makes 9% or less once you pay
+  brokerage, STT, GST, stamp duty, slippage, and taxes. Some lose money.
+- **What we built:** A set of small, pip-installable Python packages that do
+  the boring-but-critical work right:
+  - **`oq-data`** — pulls clean, corporate-action-adjusted NSE price history
+    so your tests aren't built on broken data (the HDFC merger alone breaks
+    most free sources).
+  - **`oq-backtest`** — tests your strategy with *all* the real Indian costs
+    baked in (Zerodha/Dhan/Upstox/Fyers presets included) and shows you
+    gross vs net side-by-side.
+  - **`oq-broker`** — one common interface to place paper or live orders
+    across major Indian brokers, with SEBI-2026 compliance (Algo-ID, audit
+    log, kill switch) wired in by default.
+  - **`oq-mcp`** — lets you ask an AI assistant like Claude to run an honest
+    backtest in plain English.
+  - **`oq-zoo`** — community strategies that *only* get accepted if they
+    survive honest-cost testing.
+- **Who it's for:** Retail algo traders, fintech builders, students, and
+  researchers who want truthful numbers instead of marketing-deck CAGRs.
+- **The one-liner:** Free tools tell you what you want to hear. This one tells
+  you what you'll actually make.
+
+---
+
 ## The hook
 
 Indian retail quants run backtests that look like this:
@@ -125,6 +156,58 @@ result.tearsheet()   # gross vs net, cost attribution, drawdowns, the works
 - **Phase 4 — Execution Layer**: paper + live broker abstraction with
   SEBI-2026 compliance built in.
 - **Phase 5 — Ecosystem**: docs site, strategy zoo, Discord, cohorts.
+
+### What's next — beyond v1.0
+
+We've shipped the boring-but-critical foundation. Now we make it exciting.
+
+**Near term**
+
+- **OpenQuant Web** — a hosted web app for browser-based backtesting,
+  tearsheet rendering, and strategy sharing. No `pip install` required.
+- **REST + WebSocket API** — `api.openquant.in` exposing prices, universes,
+  screeners, and `run_backtest` over HTTPS with API keys and rate limits.
+- **Tearsheet GUI** — interactive Plotly/Streamlit app for equity curves,
+  drawdown explorers, and per-trade cost attribution.
+- **CLI dashboard** — `oq dash` opens a rich TUI for live paper-trading
+  monitoring, P&L, and kill-switch control.
+- **Options analytics** — Greeks, IV surface, OI heatmap, max-pain finder,
+  SEBI F&O position-limit validator.
+- **Intraday data feed** — 1-min/5-min bars across NSE EQ + F&O.
+- **Strategy marketplace** — `oq-zoo` browsable in the web app with
+  one-click clone-and-run.
+
+**Mid term**
+
+- **Live monitoring dashboard** — self-hosted Grafana-style panels for
+  positions, slippage attribution, broker latency, and circuit-breaker
+  alerts.
+- **AI co-pilot in the GUI** — "Why did my strategy lose money on
+  2024-03-12?" answered with a chart and a paragraph.
+- **Mobile app** — read-only PnL + kill-switch on iOS/Android.
+- **Mutual fund / ETF backtesting** module.
+- **Event-study toolkit** — earnings, index inclusion, splits, mergers.
+- **Factor library** — India-specific factors (momentum, low-vol, quality,
+  monsoon-cyclical, election-cycle) with risk decomposition.
+- **Notebook gallery** — JupyterLite-powered, runs in the browser.
+
+**Far term**
+
+- **Hosted backtest cloud** — burst your 5-year walk-forward across 100
+  cores in seconds; free tier + paid intraday/realtime tier.
+- **Strategy certification program** — `oq-zoo` strategies that pass
+  walk-forward + out-of-sample get a verifiable badge.
+- **Broker partnerships** — official "Works with OpenQuant" co-marketing
+  with Zerodha, Dhan, Upstox, Fyers.
+- **College curriculum** — course-in-a-box for IITs/IIMs/NITs.
+- **Multi-asset** — bonds, commodities (MCX), currency (NSE CDS).
+- **Plugin SDK** — third-party data feeds, custom cost models, alternative
+  brokers.
+
+**Permanent non-goals**
+
+No signal selling. No "guaranteed returns" anything. No managing third-party
+capital. No HFT/co-location. No closing the source on the core.
 
 Want to help? Look for `good first issue` once we open the repo, or read
 [CONTRIBUTING.md](./CONTRIBUTING.md).
