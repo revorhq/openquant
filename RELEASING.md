@@ -1,10 +1,10 @@
 # Releasing OpenQuant India to PyPI
 
 This monorepo publishes seven packages: `oq-core`, `oq-data`, `oq-backtest`,
-`oq-broker`, `oq-mcp`, `oq-zoo`, and the `openquant-india` meta-package.
+`oq-broker`, `oq-mcp`, `oq-zoo`, and the `oqstack` meta-package.
 
 > **Naming note:** the bare `openquant` name on PyPI is held by an abandoned
-> 2017 package, so the meta-package ships as `openquant-india`. The brand,
+> 2017 package, so the meta-package ships as `oqstack`. The brand,
 > GitHub org, and docs remain "OpenQuant India".
 
 Publishing is **fully automated via GitHub Actions and PyPI Trusted
@@ -15,25 +15,44 @@ Publishing** — no API tokens are stored anywhere. Pushing a tag like
 
 ## One-time PyPI setup
 
-For **each** of the seven package names, configure a *pending trusted
-publisher* on PyPI before the first release.
+> **Important:** PyPI refuses to register two *pending* trusted publishers
+> with the same (owner, repo, workflow, environment) tuple under
+> different project names. So each package gets its **own GitHub
+> environment** named `pypi-<package>`. The workflow picks the right one
+> automatically from the tag.
 
-1. Log in to <https://pypi.org> with 2FA enabled.
-2. Go to **Your account → Publishing → Add a new pending publisher**.
-3. Fill in:
-   - **PyPI Project Name:** `oq-core` (then repeat for the other six)
-   - **Owner:** `revorhq`
-   - **Repository name:** `openquant`
-   - **Workflow name:** `publish.yml`
-   - **Environment name:** `pypi`
-4. Repeat for: `oq-data`, `oq-backtest`, `oq-broker`, `oq-mcp`, `oq-zoo`,
-   `openquant-india`.
+### Step 1 — create 7 GitHub environments
 
-Then, in the GitHub repo:
+In the repo: **Settings → Environments → New environment**. Create one
+per package:
 
-1. **Settings → Environments → New environment** named `pypi`.
-2. (Optional) Add required reviewers if you want a human approval gate
-   before any publish.
+- `pypi-oq-core`
+- `pypi-oq-data`
+- `pypi-oq-backtest`
+- `pypi-oq-broker`
+- `pypi-oq-mcp`
+- `pypi-oq-zoo`
+- `pypi-oqstack`
+
+(Optional) Add required reviewers on any environment for a human approval
+gate before publish.
+
+### Step 2 — register 7 pending trusted publishers on PyPI
+
+For **each** package, log in to <https://pypi.org> (2FA on) and go to
+**Your account → Publishing → Add a new pending publisher**. Fill in:
+
+| Field | Value |
+|---|---|
+| PyPI Project Name | the package name (e.g. `oq-core`) |
+| Owner | `revorhq` |
+| Repository name | `openquant` |
+| Workflow name | `publish.yml` |
+| Environment name | `pypi-<same-package-name>` (e.g. `pypi-oq-core`) |
+
+Repeat for all seven: `oq-core`, `oq-data`, `oq-backtest`, `oq-broker`,
+`oq-mcp`, `oq-zoo`, `oqstack`. Because each row has a unique
+environment, PyPI's "already registered" error does not apply.
 
 ---
 
@@ -43,7 +62,7 @@ Reserve every name with a `0.0.0` placeholder release so nobody squats them.
 
 ```bash
 # From the repo root, on main, with a clean tree.
-for PKG in oq-core oq-data oq-backtest oq-broker oq-mcp oq-zoo openquant-india; do
+for PKG in oq-core oq-data oq-backtest oq-broker oq-mcp oq-zoo oqstack; do
   # Temporarily set version to 0.0.0 in that package's pyproject.toml,
   # tag, push, then revert.
   sed -i.bak -E "s/^version = \"[^\"]+\"/version = \"0.0.0\"/" packages/$PKG/pyproject.toml
@@ -87,7 +106,7 @@ Each package must exist on PyPI before any other package can depend on it.
 Use this order:
 
 ```
-oq-core   →   oq-data   →   oq-backtest   →   oq-broker   →   oq-mcp   →   oq-zoo   →   openquant-india
+oq-core   →   oq-data   →   oq-backtest   →   oq-broker   →   oq-mcp   →   oq-zoo   →   oqstack
 ```
 
 After each tag push, **wait for the publish workflow to finish** (and for
@@ -102,7 +121,7 @@ tagging the next one.
 
 The workflow's tag pattern only matches the seven known package prefixes
 (`oq-core-v*`, `oq-data-v*`, `oq-backtest-v*`, `oq-broker-v*`, `oq-mcp-v*`,
-`oq-zoo-v*`, `openquant-india-v*`), so other tags are safe.
+`oq-zoo-v*`, `oqstack-v*`), so other tags are safe.
 
 ---
 

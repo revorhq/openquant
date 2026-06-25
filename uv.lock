@@ -12,24 +12,24 @@ resolution-markers = [
 
 [manifest]
 members = [
-    "openquant-india",
     "oq-backtest",
     "oq-broker",
     "oq-core",
     "oq-data",
     "oq-mcp",
     "oq-zoo",
+    "oqstack",
 ]
 
 [manifest.dependency-groups]
 dev = [
-    { name = "openquant-india", editable = "packages/openquant-india" },
     { name = "oq-backtest", editable = "packages/oq-backtest" },
     { name = "oq-broker", editable = "packages/oq-broker" },
     { name = "oq-core", editable = "packages/oq-core" },
     { name = "oq-data", editable = "packages/oq-data" },
     { name = "oq-mcp", editable = "packages/oq-mcp" },
     { name = "oq-zoo", editable = "packages/oq-zoo" },
+    { name = "oqstack", editable = "packages/oqstack" },
     { name = "pytest", specifier = ">=8.0" },
     { name = "pytest-asyncio", specifier = ">=0.23" },
     { name = "pytest-cov", specifier = ">=5.0" },
@@ -559,29 +559,6 @@ wheels = [
 ]
 
 [[package]]
-name = "openquant-india"
-version = "0.1.0"
-source = { editable = "packages/openquant-india" }
-dependencies = [
-    { name = "oq-backtest" },
-    { name = "oq-broker" },
-    { name = "oq-core" },
-    { name = "oq-data" },
-    { name = "oq-mcp" },
-    { name = "oq-zoo" },
-]
-
-[package.metadata]
-requires-dist = [
-    { name = "oq-backtest", editable = "packages/oq-backtest" },
-    { name = "oq-broker", editable = "packages/oq-broker" },
-    { name = "oq-core", editable = "packages/oq-core" },
-    { name = "oq-data", editable = "packages/oq-data" },
-    { name = "oq-mcp", editable = "packages/oq-mcp" },
-    { name = "oq-zoo", editable = "packages/oq-zoo" },
-]
-
-[[package]]
 name = "oq-backtest"
 version = "0.1.0"
 source = { editable = "packages/oq-backtest" }
@@ -687,6 +664,29 @@ requires-dist = [
     { name = "oq-backtest", editable = "packages/oq-backtest" },
     { name = "oq-core", editable = "packages/oq-core" },
     { name = "pandas", specifier = ">=2.0" },
+]
+
+[[package]]
+name = "oqstack"
+version = "0.1.0"
+source = { editable = "packages/oqstack" }
+dependencies = [
+    { name = "oq-backtest" },
+    { name = "oq-broker" },
+    { name = "oq-core" },
+    { name = "oq-data" },
+    { name = "oq-mcp" },
+    { name = "oq-zoo" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "oq-backtest", editable = "packages/oq-backtest" },
+    { name = "oq-broker", editable = "packages/oq-broker" },
+    { name = "oq-core", editable = "packages/oq-core" },
+    { name = "oq-data", editable = "packages/oq-data" },
+    { name = "oq-mcp", editable = "packages/oq-mcp" },
+    { name = "oq-zoo", editable = "packages/oq-zoo" },
 ]
 
 [[package]]
