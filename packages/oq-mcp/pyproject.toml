@@ -4,6 +4,7 @@ version = "0.1.0"
 description = "MCP server exposing OpenQuant India data, screeners, and honest backtests to LLM clients."
 requires-python = ">=3.11"
 license = { text = "Apache-2.0" }
+readme = "README.md"
 authors = [{ name = "OpenQuant India Contributors" }]
 keywords = ["mcp", "quant", "nse", "india", "llm", "claude"]
 classifiers = [

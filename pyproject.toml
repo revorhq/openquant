@@ -1,12 +1,3 @@
-[project]
-name = "openquant"
-version = "0.0.0"
-description = "OpenQuant India — honest, open source quant infrastructure for Indian markets (monorepo root)."
-readme = "README.md"
-requires-python = ">=3.11"
-license = { text = "Apache-2.0" }
-authors = [{ name = "OpenQuant India Contributors" }]
-
 [tool.uv.workspace]
 members = ["packages/*"]
 
@@ -17,6 +8,7 @@ oq-data = { workspace = true }
 oq-mcp = { workspace = true }
 oq-broker = { workspace = true }
 oq-zoo = { workspace = true }
+openquant = { workspace = true }
 
 [dependency-groups]
 dev = [
@@ -30,6 +22,7 @@ dev = [
     "oq-mcp",
     "oq-broker",
     "oq-zoo",
+    "openquant",
 ]
 
 [tool.ruff]

@@ -4,6 +4,7 @@ version = "0.1.0"
 description = "NSE/BSE data pipeline for OpenQuant India: bhavcopy ingestion, corporate actions, point-in-time index universes."
 requires-python = ">=3.11"
 license = { text = "Apache-2.0" }
+readme = "README.md"
 authors = [{ name = "OpenQuant India Contributors" }]
 keywords = ["quant", "nse", "bse", "india", "bhavcopy", "market-data"]
 classifiers = [

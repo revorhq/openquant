@@ -1,0 +1,64 @@
+name: publish
+
+on:
+  push:
+    tags:
+      - "oq-core-v*"
+      - "oq-data-v*"
+      - "oq-backtest-v*"
+      - "oq-broker-v*"
+      - "oq-mcp-v*"
+      - "oq-zoo-v*"
+      - "openquant-v*"
+
+jobs:
+  publish:
+    name: build and publish ${{ github.ref_name }}
+    runs-on: ubuntu-latest
+    environment: pypi
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v3
+        with:
+          enable-cache: true
+
+      - name: Set up Python
+        run: uv python install 3.11
+
+      - name: Parse package and version from tag
+        id: parse
+        run: |
+          TAG="${GITHUB_REF_NAME}"
+          PKG="${TAG%-v*}"
+          VER="${TAG##*-v}"
+          echo "package=${PKG}" >> "$GITHUB_OUTPUT"
+          echo "version=${VER}"  >> "$GITHUB_OUTPUT"
+          echo "Tag ${TAG} -> package=${PKG} version=${VER}"
+
+      - name: Verify pyproject version matches tag
+        run: |
+          PKG="${{ steps.parse.outputs.package }}"
+          VER="${{ steps.parse.outputs.version }}"
+          FILE="packages/${PKG}/pyproject.toml"
+          DECLARED=$(grep -E '^version = ' "$FILE" | head -1 | sed -E 's/version = "([^"]+)"/\1/')
+          if [ "$DECLARED" != "$VER" ]; then
+            echo "::error::Tag version ${VER} does not match ${FILE} version ${DECLARED}"
+            exit 1
+          fi
+
+      - name: Build
+        run: |
+          rm -rf dist
+          uv build --package "${{ steps.parse.outputs.package }}"
+          ls -la dist
+
+      - name: Publish to PyPI (trusted publishing)
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          packages-dir: dist
+          skip-existing: true

@@ -76,3 +76,7 @@ logs/
 !.env.example
 *.pem
 *.key
+
+# build artifacts
+dist/
+*.egg-info/

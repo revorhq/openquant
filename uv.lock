@@ -21,6 +21,21 @@ members = [
     "oq-zoo",
 ]
 
+[manifest.dependency-groups]
+dev = [
+    { name = "openquant", editable = "packages/openquant" },
+    { name = "oq-backtest", editable = "packages/oq-backtest" },
+    { name = "oq-broker", editable = "packages/oq-broker" },
+    { name = "oq-core", editable = "packages/oq-core" },
+    { name = "oq-data", editable = "packages/oq-data" },
+    { name = "oq-mcp", editable = "packages/oq-mcp" },
+    { name = "oq-zoo", editable = "packages/oq-zoo" },
+    { name = "pytest", specifier = ">=8.0" },
+    { name = "pytest-asyncio", specifier = ">=0.23" },
+    { name = "pytest-cov", specifier = ">=5.0" },
+    { name = "ruff", specifier = ">=0.6.0" },
+]
+
 [[package]]
 name = "annotated-types"
 version = "0.7.0"
@@ -545,37 +560,25 @@ wheels = [
 
 [[package]]
 name = "openquant"
-version = "0.0.0"
-source = { virtual = "." }
-
-[package.dev-dependencies]
-dev = [
+version = "0.1.0"
+source = { editable = "packages/openquant" }
+dependencies = [
     { name = "oq-backtest" },
     { name = "oq-broker" },
     { name = "oq-core" },
     { name = "oq-data" },
     { name = "oq-mcp" },
     { name = "oq-zoo" },
-    { name = "pytest" },
-    { name = "pytest-asyncio" },
-    { name = "pytest-cov" },
-    { name = "ruff" },
 ]
 
 [package.metadata]
-
-[package.metadata.requires-dev]
-dev = [
+requires-dist = [
     { name = "oq-backtest", editable = "packages/oq-backtest" },
     { name = "oq-broker", editable = "packages/oq-broker" },
     { name = "oq-core", editable = "packages/oq-core" },
     { name = "oq-data", editable = "packages/oq-data" },
     { name = "oq-mcp", editable = "packages/oq-mcp" },
     { name = "oq-zoo", editable = "packages/oq-zoo" },
-    { name = "pytest", specifier = ">=8.0" },
-    { name = "pytest-asyncio", specifier = ">=0.23" },
-    { name = "pytest-cov", specifier = ">=5.0" },
-    { name = "ruff", specifier = ">=0.6.0" },
 ]
 
 [[package]]
