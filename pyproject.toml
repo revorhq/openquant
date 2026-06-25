@@ -16,6 +16,7 @@ oq-backtest = { workspace = true }
 oq-data = { workspace = true }
 oq-mcp = { workspace = true }
 oq-broker = { workspace = true }
+oq-zoo = { workspace = true }
 
 [dependency-groups]
 dev = [
@@ -28,6 +29,7 @@ dev = [
     "oq-data",
     "oq-mcp",
     "oq-broker",
+    "oq-zoo",
 ]
 
 [tool.ruff]

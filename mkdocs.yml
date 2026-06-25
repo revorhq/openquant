@@ -1,0 +1,105 @@
+site_name: OpenQuant India
+site_description: Honest, open source quant infrastructure for Indian markets.
+site_url: https://revorhq.github.io/openquant/
+repo_url: https://github.com/revorhq/openquant
+repo_name: revorhq/openquant
+edit_uri: edit/main/docs/
+copyright: "Apache 2.0 &middot; OpenQuant India Contributors"
+
+theme:
+  name: material
+  language: en
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.expand
+    - navigation.top
+    - navigation.indexes
+    - navigation.footer
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+    - content.code.annotate
+    - content.tabs.link
+    - toc.follow
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: deep purple
+      accent: indigo
+      toggle:
+        icon: material/weather-night
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: deep purple
+      accent: indigo
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to light mode
+  icon:
+    repo: fontawesome/brands/github
+    edit: material/pencil
+    view: material/eye
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - def_list
+  - footnotes
+  - md_in_html
+  - tables
+  - toc:
+      permalink: true
+  - pymdownx.details
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.tasklist:
+      custom_checkbox: true
+
+plugins:
+  - search
+
+nav:
+  - Home: index.md
+  - Quickstart: quickstart.md
+  - Honest backtesting: honest-backtesting.md
+  - Cookbook:
+      - cookbook/index.md
+      - First backtest: cookbook/first-backtest.md
+      - Adding broker costs: cookbook/broker-costs.md
+      - Point-in-time universes: cookbook/pit-universes.md
+      - Paper to live: cookbook/paper-to-live.md
+      - MCP with Claude: cookbook/mcp-claude.md
+  - API reference:
+      - api/index.md
+      - oq-core: api/oq-core.md
+      - oq-data: api/oq-data.md
+      - oq-backtest: api/oq-backtest.md
+      - oq-mcp: api/oq-mcp.md
+      - oq-broker: api/oq-broker.md
+  - Community:
+      - community/index.md
+      - Contributing: community/contributing.md
+      - Good first issues: community/good-first-issues.md
+      - Strategy zoo: community/zoo.md
+      - 30 Days of OpenQuant: community/30-days.md
+      - Cohort program: community/cohorts.md
+      - Discord: community/discord.md
+  - Compliance:
+      - compliance/index.md
+      - SEBI 2026: compliance/sebi-2026.md
+      - Disclaimer: compliance/disclaimer.md
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/revorhq/openquant
+  generator: false
